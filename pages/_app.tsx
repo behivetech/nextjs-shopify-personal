@@ -1,6 +1,3 @@
-import '@assets/main.css'
-import 'keen-slider/keen-slider.min.css'
-
 import { FC } from 'react'
 import type { AppProps } from 'next/app'
 
@@ -11,6 +8,8 @@ builder.init(builderConfig.apiKey)
 import '../blocks/ProductGrid/ProductGrid.builder'
 import '../blocks/CollectionView/CollectionView.builder'
 import '../blocks/ProductView/ProductView.builder'
+
+import '@assets/main.css'
 
 Builder.register('insertMenu', {
   name: 'Shopify Collections Components',
