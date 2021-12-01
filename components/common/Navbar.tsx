@@ -3,7 +3,6 @@
 import React, { FC, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { UserNav } from '@components/common'
-import { BuilderComponent, builder } from '@builder.io/react'
 import { useCart } from '@lib/shopify/storefront-data-hooks'
 import { jsx, Themed, useThemeUI } from 'theme-ui'
 import { useUI } from '@components/ui/context'
@@ -11,34 +10,12 @@ import Image from 'next/image'
 import Searchbar from './Searchbar'
 
 const Navbar: FC = () => {
-  const [announcement, setAnnouncement] = useState()
   const { theme } = useThemeUI()
   const { navigationLinks, logo } = useUI()
   const cart = useCart()
 
-  useEffect(() => {
-    async function fetchContent() {
-      const items = cart?.lineItems || []
-      const anouncementContent = await builder
-        .get('announcement-bar', {
-          cacheSeconds: 120,
-          userAttributes: {
-            itemInCart: items.map((item: any) => item.variant.product.handle),
-          } as any,
-        })
-        .toPromise()
-      setAnnouncement(anouncementContent)
-    }
-    fetchContent()
-  }, [cart?.lineItems])
-
   return (
     <React.Fragment>
-      <BuilderComponent
-        content={announcement}
-        data={{ theme }}
-        model="announcement-bar"
-      />
       <Themed.div
         as="header"
         sx={{
